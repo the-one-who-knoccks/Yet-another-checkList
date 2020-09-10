@@ -12,7 +12,7 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
       { text: inputText, completed: false, id: Math.random() + 10000 }
     ]);
 
-  }
+  }  
 
   return (
     <form>
