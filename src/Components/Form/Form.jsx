@@ -14,6 +14,7 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
     ]);
     setInputText('');
 
+
   }  
 
   return (
