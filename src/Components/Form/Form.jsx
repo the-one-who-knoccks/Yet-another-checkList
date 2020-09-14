@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const Form = ({ inputText, setInputText, todos, setTodos }) => {
+const Form = ({ inputText, setInputText, todos, setTodos, setFilters }) => {
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
   };
@@ -13,9 +13,11 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
       { text: inputText, completed: false, id: uuidv4() }
     ]);
     setInputText('');
+  };
 
-
-  }  
+  const filterHandler = (e) => {
+    setFilters(e.target.value);
+  }
 
   return (
     <form>
@@ -24,10 +26,10 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select name="todos" className="filter-todo">
-          <option value="all">Todos</option>
-          <option value="completed">Completos</option>
-          <option value="uncompleted">Incompletos</option>
+        <select  onChange={filterHandler} name="todos" className="filter-todo">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="uncompleted">Uncompleted</option>
         </select>
       </div>
     </form>
