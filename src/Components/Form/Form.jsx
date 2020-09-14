@@ -6,16 +6,29 @@ const Form = ({ inputText, setInputText, todos, setTodos, setFilters }) => {
     setInputText(e.target.value);
   };
 
+  
+
   const submitTodoHandler = (e) => {
 
-    e.preventDefault();
-    setTodos([
-      ...todos,
-      { text: inputText, completed: false, id: uuidv4() }
-    ]);
-    setInputText('');
-    
-  };
+    if (e.target.value === undefined) {
+      alert('Please, complete the input field!');
+
+    } else {
+      e.preventDefault();
+      setTodos([
+        ...todos,
+        { text: inputText, completed: false, id: uuidv4() }
+      ]);
+
+
+      setInputText('');
+
+    };
+
+
+  }
+
+
 
   const filterHandler = (e) => {
     setFilters(e.target.value);
@@ -23,12 +36,12 @@ const Form = ({ inputText, setInputText, todos, setTodos, setFilters }) => {
 
   return (
     <form>
-      <input type="text" className="todo-input" onChange={inputTextHandler} value={inputText}/>
+      <input type="text" className="todo-input" onChange={inputTextHandler} value={inputText} />
       <button className="todo-button" type="submit" onClick={submitTodoHandler}>
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select  onChange={filterHandler} name="todos" className="filter-todo">
+        <select onChange={filterHandler} name="todos" className="filter-todo">
           <option value="all">All</option>
           <option value="completed">Completed</option>
           <option value="uncompleted">Uncompleted</option>
