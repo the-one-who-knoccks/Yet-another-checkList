@@ -12,7 +12,8 @@ Uma simples To Do list feita com React.
 
 
 ~ 
-Desenvolvido 💜 por Thiago Alves.
+
+Developer by Dev Ed, modificado com 💜 por Thiago Alves.
 
 
 
