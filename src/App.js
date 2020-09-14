@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 
 import Form from './Components/Form/Form';
@@ -8,37 +8,64 @@ const App = () => {
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([]);
   const [filter, setFilters] = useState('all');
-  const [filtered, setFiltered] = useState([]);
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
+    filterHandler();
+    saveLocalTodos();
+  }, [todos, filter]);
 
   const filterHandler = () => {
     switch (filter) {
       case 'completed':
-        setFiltered(todos.filter(todo => todo.completed === true));
+        setFilteredTodos(todos.filter((todo) => todo.completed === true));
         break;
-      case 'uncomplited':
-        setFiltered(todos.filter(todo => todo.uncompleted === false));
+      case 'uncompleted':
+        setFilteredTodos(todos.filter((todo) => todo.completed === false));
         break;
       default:
-        setFiltered(todos);
+        setFilteredTodos(todos);
         break;
     }
-  }
+  };
 
-  return (
-    <div className="App">
-      <header>
-        <h1>Yet Another Checklist </h1>
-      </header>
-      <Form
-        todos={todos}
-        setTodos={setTodos}
-        inputText={inputText}
-        setInputText={setInputText}
-        setFilters={setFilters}
-      />
-      <ToDoList setTodos={setTodos} todos={todos} />
-    </div>
-  );
+  const saveLocalTodos = () => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  };
+
+const getLocalTodos = () => {
+  if (localStorage.getItem('todos') === null) {
+    localStorage.setItem('todos', JSON.stringify([]));
+  } else {
+    let localTodo = JSON.parse(localStorage.getItem('todos'));
+    setTodos(localTodo);
+  }
+}
+
+
+return (
+  <div className="App">
+    <header>
+      <h1>Yet Another Checklist </h1>
+    </header>
+    <Form
+      todos={todos}
+      setTodos={setTodos}
+      inputText={inputText}
+      setInputText={setInputText}
+      setFilters={setFilters}
+
+    />
+    <ToDoList
+      filteredTodos={filteredTodos}
+      setTodos={setTodos}
+      todos={todos} />
+  </div>
+);
 };
 
 export default App;

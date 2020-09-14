@@ -7,12 +7,14 @@ const Form = ({ inputText, setInputText, todos, setTodos, setFilters }) => {
   };
 
   const submitTodoHandler = (e) => {
+
     e.preventDefault();
     setTodos([
       ...todos,
       { text: inputText, completed: false, id: uuidv4() }
     ]);
     setInputText('');
+    
   };
 
   const filterHandler = (e) => {

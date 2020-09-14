@@ -77,7 +77,7 @@ form button:hover {
   font-size: 1rem;
 }
 .complete-btn {
-  background: rgb(11, 212, 162);
+  background: rgba(142, 81, 223, 0.5);
 }
 .todo-item {
   padding: 0rem 0.5rem;
@@ -131,7 +131,8 @@ select {
   right: 0;
   padding: 1rem;
  
-  background: rgb(11, 212, 162);
+  background: rgba(142, 81, 223, 0.5);
+
   cursor: pointer;
   pointer-events: none;
 }
